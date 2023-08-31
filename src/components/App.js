@@ -33,12 +33,9 @@ export class App extends Component {
   };
 
   changeContactsFilter = newFilter => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(filter =>
-        filter.name.toUpperCase().includes(newFilter.toUpperCase())
-      ),
+    this.setState({
       filter: newFilter,
-    }));
+    });
   };
 
   deleteContact = contact => {
@@ -50,6 +47,10 @@ export class App extends Component {
   };
 
   render() {
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toUpperCase().includes(this.state.filter.toUpperCase())
+    );
+
     return (
       <Layout>
         <ContactForm onAdd={this.addContact} />
@@ -58,7 +59,9 @@ export class App extends Component {
           onFilter={this.changeContactsFilter}
         />
         <ContactsList
-          allContacts={this.state.contacts}
+          allContacts={
+            this.state.filter ? filteredContacts : this.state.contacts
+          }
           onDelete={this.deleteContact}
         />
         <GlobalStyle />
