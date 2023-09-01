@@ -59,9 +59,7 @@ export class App extends Component {
           onFilter={this.changeContactsFilter}
         />
         <ContactsList
-          allContacts={
-            this.state.filter ? filteredContacts : this.state.contacts
-          }
+          allContacts={filteredContacts}
           onDelete={this.deleteContact}
         />
         <GlobalStyle />
